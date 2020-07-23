@@ -19,19 +19,30 @@ module.exports.friends=function(req,res){
 
 module.exports.create=function(req,res){
     console.log('hello',req.body);
-    
-    User.create({
-        email:req.body.email,
-        password: req.body.password,
-        name:req.body.name,
-    },function(err,newUser){
-        if(err){
-            console.log("error",err);
-            return ;
+
+    User.find({email:req.body.email},function(err,possUser){
+        console.log(possUser[0],"whatup");
+        if(possUser[0]!=undefined  && possUser[0].email==req.body.email){
+            console.log('user already exist');
+            return res.redirect('/users/sign-in');
         }
-        console.log("*********",newUser);
-        return res.redirect('/');
-    })
+        else{
+            User.create({
+                email:req.body.email,
+                password: req.body.password,
+                name:req.body.name,
+            },function(err,newUser){
+                if(err){
+                    console.log("error",err);
+                    return ;
+                }
+                console.log("*********",newUser);
+                return res.redirect('/');
+            })
+        }
+    });
+    
+    
 };
 module.exports.signIn=function(req,res){
     res.render('signIn',{
