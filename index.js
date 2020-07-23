@@ -4,7 +4,8 @@ const port=8000;
 const expressLayout=require('express-ejs-layouts');
 
 const db=require('./config/mongoose');
-
+const User=require('./models/user');
+app.use(express.urlencoded());
 app.use(express.static('./assets'));
 
 //put layout use before routes
