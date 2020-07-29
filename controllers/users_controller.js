@@ -4,10 +4,26 @@ const User=require('../models/user');
 
 
 module.exports.profile=function(req,res){
+    res.render('user_profile.ejs',{
+        title  :  "kashti-Users"
+    });
+};
+
+module.exports.signUp=function(req,res){
+if(req.isAuthenticated()){
+   return res.redirect('/users/profile');
+}
+
     res.render('user',{
         title  :  "kashti-Users"
     });
 };
+
+module.exports.destroySession = function(req,res){
+    req.logout();
+    return res.redirect('/');
+}
+
 module.exports.friends=function(req,res){
     res.end('<h1>Friends</h1>');
 };
@@ -45,36 +61,41 @@ module.exports.create=function(req,res){
     
 };
 module.exports.signIn=function(req,res){
+    if(req.isAuthenticated()){
+       return res.redirect('/users/profile');
+    }
     res.render('signIn',{
         title:"Sign-In",
     });
+    // return res.redirect('/');
 };
 module.exports.validate=function(req,res){
+    return res.redirect('/users/profile');
     //console.log(req.body);
-    var email=req.body.email;
-    User.find({email:email},function(err,docs){
-        if(err){
-            res.end("<h1>please signup first</h1>");
-        }
-        else{
-            if(docs[0]==undefined){
-                console.log('NOT SIGNED IN');
-                res.end("<h1>please signup first</h1>");
-            }
-            else{
-                if(docs[0].password!=req.body.password){
-                    console.log('Not - SIGNED - IN');
-                    res.end("<h1>Invalid password</h1>");
-                }
-                else{
-                    console.log('SIGNED IN');
-                    res.end("<h1>Ola! User</h1>");
-                }
+    // var email=req.body.email;
+    // User.find({email:email},function(err,docs){
+    //     if(err){
+    //         res.end("<h1>please signup first</h1>");
+    //     }
+    //     else{
+    //         if(docs[0]==undefined){
+    //             console.log('NOT SIGNED IN');
+    //             res.end("<h1>please signup first</h1>");
+    //         }
+    //         else{
+    //             if(docs[0].password!=req.body.password){
+    //                 console.log('Not - SIGNED - IN');
+    //                 res.end("<h1>Invalid password</h1>");
+    //             }
+    //             else{
+    //                 console.log('SIGNED IN');
+    //                 res.end("<h1>Ola! User</h1>");
+    //             }
                 
-            }
-            // console.log(docs[0]);
-        }
-    });
-    // console.log(email);
-    // res.end("<h1>signIn</h1>")
+    //         }
+    //         // console.log(docs[0]);
+    //     }
+    // });
+    // // console.log(email);
+    // // res.end("<h1>signIn</h1>")
 }
