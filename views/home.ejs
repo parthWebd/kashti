@@ -1,4 +1,21 @@
 
         
-        <h1>Kashti , the social media app</h1>
+<h1>Kashti , the social media app</h1>
+<section id="feed-post">
+        <h4>Posts</h4>
+        <form action="/posts/post_form" id="new-post-form"  method="POST">
+                <textarea name="content" id="" cols="30" rows="3" placeholder="type here..."></textarea>
+                <input type="submit" value="Post">
+        </form>
+</section>
+
+<ol>
+        <p>My Post</p>
+        <% for(let i of post) { %>
+                <li><%= i.content %></li>
+                <small>
+                        <%= i.user.name %>
+                </small>
+        <% } %>
+</ol>
        

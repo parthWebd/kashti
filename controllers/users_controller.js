@@ -3,6 +3,8 @@ const User=require('../models/user');
 
 
 
+
+
 module.exports.profile=function(req,res){
     res.render('user_profile.ejs',{
         title  :  "kashti-Users"
@@ -32,6 +34,12 @@ module.exports.friends=function(req,res){
 //         title  :  "kashti-Users"
 //     });
 // };
+
+module.exports.postSome=function(req,res){
+    console.log(req.body);
+    return res.redirect('back');
+}
+
 
 module.exports.create=function(req,res){
     console.log('hello',req.body);
@@ -69,6 +77,9 @@ module.exports.signIn=function(req,res){
     });
     // return res.redirect('/');
 };
+
+
+
 module.exports.validate=function(req,res){
     return res.redirect('/users/profile');
     //console.log(req.body);

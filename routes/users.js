@@ -10,5 +10,8 @@ router.get('/sign-out', usersController.destroySession)
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in',usersController.signIn);
 router.post('/validate',passport.authenticate('local',{failureRedirect: '/users/sign-in'}),usersController.validate);
+
+// router.post('/post_form', usersController.postSome);
+
 // router.get('/friends', usersController.friends);
 module.exports = router;
