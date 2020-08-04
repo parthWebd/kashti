@@ -2,7 +2,7 @@
 const posts=require('../models/post');
 // module.exports.actionName = function(req,res){.....}
 module.exports.home = function(req,res){
-    let id=req.user._id;
+    //let id=req.user._id;
     // posts.find({},function(err,post_in_user){
     //     if(err){
     //         console.log(err);
@@ -15,7 +15,15 @@ module.exports.home = function(req,res){
     //     });
     // })
     //to populate user of each post
-    posts.find({}).populate('user').exec(function(err,post_in_user){
+    posts.find({})
+    .populate('user')
+    .populate({
+        path:'comments',
+        populate:{
+            path:'user'
+        }
+    })
+    .exec(function(err,post_in_user){
         if(err){
             console.log(err);
             return;
