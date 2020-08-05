@@ -1,0 +1,12 @@
+header {
+  background-color: skybluE;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  header ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style-type: none; }
+    header ul li {
+      padding: 0 5px; }
