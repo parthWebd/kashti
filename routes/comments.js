@@ -4,4 +4,5 @@ const commentController=require('../controllers/commentsController');
 const passport=require('../config/passport-local-strategy');
 // post can only be created once the user is logged in.
 router.post('/create',passport.checkAuthentication,commentController.create);
+router.get('/destroy/:id',passport.checkAuthentication,commentController.destroy);
 module.exports = router;

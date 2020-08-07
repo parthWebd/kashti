@@ -1,5 +1,6 @@
-
+constUser=require('../models/user');
 const posts=require('../models/post');
+const User = require('../models/user');
 // module.exports.actionName = function(req,res){.....}
 module.exports.home = function(req,res){
     //let id=req.user._id;
@@ -24,15 +25,21 @@ module.exports.home = function(req,res){
         }
     })
     .exec(function(err,post_in_user){
-        if(err){
-            console.log(err);
-            return;
-        }
+
+        User.find({},function(err,users){
+            return res.render('home',{
+                title:'Kashti',
+                post:post_in_user,
+                all_users:users,
+            });
+        })
+
+        // if(err){
+        //     console.log(err);
+        //     return;
+        // }
         //console.log(id);
-        return res.render('home',{
-            title:'Kashti',
-            post:post_in_user,
-        });
+        
     })
     
     

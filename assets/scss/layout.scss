@@ -2,3 +2,15 @@ body{
     margin: 0;
     background-color: green;
 }
+#header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    div{
+        font-weight: bold;
+        a{
+            text-decoration: none;
+        }
+    }
+}

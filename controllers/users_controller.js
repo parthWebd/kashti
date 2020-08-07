@@ -6,10 +6,32 @@ const User=require('../models/user');
 
 
 module.exports.profile=function(req,res){
-    res.render('user_profile.ejs',{
-        title  :  "kashti-Users"
-    });
+    User.findById(req.params.id,function(err,user){
+        // console.log(user);
+        res.render('user_profile.ejs',{
+            title  :  "kashti-Users",
+            profile_user:user, 
+        });
+    })
+    
 };
+// module.exports.profile1=function(req,res){
+//     res.render('user_profile.ejs',{
+//         title  :  "kashti-Users",
+//         profile_user:user, 
+//     });
+    
+// };
+
+module.exports.update=function(req,res){
+    if(req.user.id==req.params.id){
+        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            return res.redirect('/');
+        })
+    }else{
+        return res.status(401).send('Unauthorized');
+    }
+}
 
 module.exports.signUp=function(req,res){
 if(req.isAuthenticated()){
@@ -70,7 +92,7 @@ module.exports.create=function(req,res){
 };
 module.exports.signIn=function(req,res){
     if(req.isAuthenticated()){
-       return res.redirect('/users/profile');
+       return res.redirect('/');
     }
     res.render('signIn',{
         title:"Sign-In",
@@ -81,7 +103,7 @@ module.exports.signIn=function(req,res){
 
 
 module.exports.validate=function(req,res){
-    return res.redirect('/users/profile');
+    return res.redirect('/');
     //console.log(req.body);
     // var email=req.body.email;
     // User.find({email:email},function(err,docs){
