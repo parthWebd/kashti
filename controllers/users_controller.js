@@ -44,6 +44,7 @@ if(req.isAuthenticated()){
 };
 
 module.exports.destroySession = function(req,res){
+    req.flash('success','you have logged out');
     req.logout();
     return res.redirect('/');
 }
@@ -91,6 +92,7 @@ module.exports.create=function(req,res){
     
 };
 module.exports.signIn=function(req,res){
+    
     if(req.isAuthenticated()){
        return res.redirect('/');
     }
@@ -103,6 +105,7 @@ module.exports.signIn=function(req,res){
 
 
 module.exports.validate=function(req,res){
+    req.flash('success','Logged In Successfully')
     return res.redirect('/');
     //console.log(req.body);
     // var email=req.body.email;

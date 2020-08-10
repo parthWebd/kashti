@@ -11,11 +11,15 @@ module.exports.create = function(req,res){
                 posts:req.body.post,
                 user:req.user._id
             },function(err,comment){
-                if(err){console.log(err);return;}
+                if(err){
+                    req.flash('error','Error in deleting comment');
+                    console.log(err);
+                    return;
+                }
 
                 post.comments.push(comment);
                 post.save();
-                
+                req.flash('success','Comment added successfully');
                 res.redirect('/');
 
             });
@@ -34,8 +38,10 @@ module.exports.destroy=function(req,res){
             Post.findByIdAndUpdate(postId,{ $pull:{comments:req.params.id}},function(err,post){
                 return res.redirect('back');
             })
-        }else{
-            return res.redirect('back');
+            req.flash('success','Comment deleted successfully');
         }
+        // else{
+        //     return res.redirect('back');
+        // }
     });
 }
