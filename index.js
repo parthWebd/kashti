@@ -12,7 +12,7 @@ const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy')
 const passportJwt=require('./config/passport-jwt-strategy');
 const MongoStore=require('connect-mongo')(session);
-
+const passportGoogle=require('./config/passport-google=oauth2-strategy');
 //to give flash messages
 const flash=require('connect-flash');
 const customMware=require('./config/middleware');
